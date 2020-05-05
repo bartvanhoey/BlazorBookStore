@@ -1,16 +1,21 @@
 @page "/authors"
 @inherits AuthorsBase 
 
+
 <div class="col-12">
     <h3><b>Enter Author Information</b></h3>
     <hr>
 
-     <EditForm Model="@Author" OnValidSubmit="@SaveAUthorAsync">
-         <DataAnnotationsValidator/>
+    <div id="divServerValidations" class="col-10 alert alert-info">
+
+    </div>
+
+     <EditForm Model="@Author" OnValidSubmit="@SaveAuthorAsync">
+         @* <DataAnnotationsValidator/> *@
          <ValidationSummary/>
         <div class="col-12 row">
             <label for="firstName" class="col-2 font-weight-bold">First Name</label>
-            <InputText id="firstName" @bind-Value="Author.FirstName" placeholder="First Name" class="form-control col-3" />
+            <input @ref="firstNameRef" id="firstName" @bind="Author.FirstName" placeholder="First Name" class="form-control col-3" />
             <ValidationMessage For="@(() => Author.FirstName)"/>
         </div>
 
@@ -18,13 +23,22 @@
             <label for="lastName" class="col-2 font-weight-bold">Last Name</label>
             <InputText id="lastName" @bind-Value="Author.LastName" placeholder="Laste Name" class="form-control col-3" />
             <ValidationMessage For="@(() => Author.LastName)"/>
-
         </div>
 
         <div class="col-12 row">
             <label for="city" class="col-2 font-weight-bold">City</label>
-            <InputText id="city" @bind-Value="Author.City" placeholder="City" class="form-control col-3" />
-            <ValidationMessage For="@(() => Author.City)"/>
+            @* <InputText id="city" @bind-Value="Author.City" placeholder="City" class="form-control col-3" />
+            <ValidationMessage For="@(() => Author.City)"/> *@
+           <InputSelect @bind-Value="Author.City" class="form-control col-3">
+                @if (@Cities != null)
+                {
+                    <option value="">select city..</option>
+                    @foreach (var city in Cities)
+                    {
+                        <option value="@city">@city</option>
+                    }
+                }
+           </InputSelect>
         </div>
 
         <div class="col-12 row">
