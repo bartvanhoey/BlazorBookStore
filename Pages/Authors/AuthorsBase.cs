@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using BlazorBookStore.Data;
 using Microsoft.AspNetCore.Components;
@@ -19,25 +19,23 @@ namespace BlazorBookStore.Pages
         protected ElementReference firstNameRef;
         public string[] Cities { get; set; }
         public string RecordName { get; set; }
-        public bool IsSavedSuccessfully { get; set; }
+        public bool Result { get; set; }
+        private string _selectedCity;
 
-        protected override async Task OnInitializedAsync()
+        private async Task LoadAuthors()
         {
-            await LoadAuthors();
+            Authors = await AuthorService.GetAuthors();
+            StateHasChanged();
         }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected void OnSelectCityChange(ChangeEventArgs changeEventArgs)
         {
-            if (firstRender && Cities == null)
-            {
-                Cities = await JSRuntime.InvokeAsync<string[]>("getCities");
-                StateHasChanged();
-            }
+            _selectedCity = (string)changeEventArgs.Value;
         }
-
         public async Task SaveAuthorAsync()
         {
-            IsSavedSuccessfully = false; // await AuthorService.SaveAuthor(Author);
+            Author.City = _selectedCity;
+            // Result = false; // await AuthorService.SaveAuthor(Author);
+            Result = await AuthorService.SaveAuthor(Author);
             IsVisible = true;
             RecordName = Author.FirstName + " " + Author.LastName;
             await LoadAuthors();
@@ -48,10 +46,34 @@ namespace BlazorBookStore.Pages
             await JSRuntime.InvokeVoidAsync("setFocus", firstNameRef);
         }
 
-        private async Task LoadAuthors()
+        protected override void OnInitialized() => Console.WriteLine("Authors: OnInitialized");
+        protected override async Task OnInitializedAsync()
         {
-            Authors = await AuthorService.GetAuthors();
-            StateHasChanged();
+            Console.WriteLine("Authors: OnInitializedAsync");
+            await LoadAuthors();
         }
+        protected override void OnParametersSet() => Console.WriteLine("Authors: OnParametersSet");
+        protected override async Task OnParametersSetAsync()
+        {
+            Console.WriteLine("Authors: OnParametersSetAsync");
+            Result = await AuthorService.CheckConnection();
+            IsVisible = true;
+        }
+
+        protected override void OnAfterRender(bool firstRender) => Console.WriteLine($"Authors: OnAfterRender - firstRender = {firstRender}");
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            Console.WriteLine($"Authors: OnAfterRenderAsync - firstRender = {firstRender}");
+            await base.OnAfterRenderAsync(firstRender);
+        }
+
+        // protected override bool ShouldRender(){
+        //     Console.WriteLine("Authors: ShouldRender");
+        //     return false;
+        // }
+
+        // public void Dispose(){
+        //     Console.WriteLine("Authors: Dispose");
+        // }
     }
 }

@@ -64,5 +64,10 @@ namespace BlazorBookStore.Data
             id += random.Next(1000, 10000).ToString();
             return id;
         }
+
+        public Task<bool> CheckConnection()
+        {
+            return Task.FromResult(false);
+        }
     }
 }
