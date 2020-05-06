@@ -12,5 +12,6 @@ namespace BlazorBookStore.Data
         Task<Author> GetAuthor(string id);
         Task<bool> SaveAuthor(Author author);
         Task<bool> DeleteAuthor(string id);
+        Task<bool> CheckConnection();
     }
 }

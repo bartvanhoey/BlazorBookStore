@@ -7,7 +7,7 @@
     <h3><b>Enter Author Information</b></h3>
     <hr>
 
-   <ServerValidations IsVisible="IsVisible" IsSavedSuccessfully="IsSavedSuccessfully">
+   <ServerValidations IsVisible="IsVisible" Result="Result">
         Author: @RecordName
    </ServerValidations>
 
@@ -28,18 +28,7 @@
 
         <div class="col-12 row">
             <label for="city" class="col-2 font-weight-bold">City</label>
-            @* <InputText id="city" @bind-Value="Author.City" placeholder="City" class="form-control col-3" />
-            <ValidationMessage For="@(() => Author.City)"/> *@
-           <InputSelect @bind-Value="Author.City" class="form-control col-3">
-                @if (@Cities != null)
-                {
-                    <option value="">select city..</option>
-                    @foreach (var city in Cities)
-                    {
-                        <option value="@city">@city</option>
-                    }
-                }
-           </InputSelect>
+            <SelectCity OnChangeEvent="OnSelectCityChange"></SelectCity>
         </div>
 
         <div class="col-12 row">

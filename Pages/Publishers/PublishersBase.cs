@@ -19,9 +19,10 @@ namespace BlazorBookStore.Pages.Publishers
         public int MyProperty { get; set; }
         public List<Publisher> Publishers { get; set; }
         protected ElementReference publisherNameRef;
+        private string _selectedCity;
         public bool IsVisible { get; set; } = false;
         public string RecordName { get; set; }
-        public bool IsSavedSuccessfully { get; set; }
+        public bool Result { get; set; }
 
 
         protected override async Task OnInitializedAsync()
@@ -29,18 +30,10 @@ namespace BlazorBookStore.Pages.Publishers
             await LoadPublishers();
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                Cities = await JSRuntime.InvokeAsync<string[]>("getCities");
-                StateHasChanged();
-            }
-        }
-
         protected async Task SavePublisherAsync()
         {
-            IsSavedSuccessfully = await PublisherService.SavePublisher(Publisher);
+            Publisher.City = _selectedCity;
+            Result = await PublisherService.SavePublisher(Publisher);
             RecordName = Publisher.Name;
             IsVisible = true;
             await LoadPublishers();
@@ -56,5 +49,8 @@ namespace BlazorBookStore.Pages.Publishers
             StateHasChanged();
         }
 
+        protected void OnSelectCityChange(ChangeEventArgs changeEventArgs) {
+            _selectedCity = changeEventArgs.Value.ToString();
+        }
     }
 }
