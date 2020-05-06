@@ -1,3 +1,4 @@
+@page "/"
 @page "/authors"
 @inherits AuthorsBase 
 
@@ -6,9 +7,9 @@
     <h3><b>Enter Author Information</b></h3>
     <hr>
 
-    <div id="divServerValidations" class="col-10 alert alert-info">
-
-    </div>
+   <ServerValidations IsVisible="IsVisible" IsSavedSuccessfully="IsSavedSuccessfully">
+        Author: @RecordName
+   </ServerValidations>
 
      <EditForm Model="@Author" OnValidSubmit="@SaveAuthorAsync">
          @* <DataAnnotationsValidator/> *@

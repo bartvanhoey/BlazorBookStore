@@ -11,14 +11,16 @@ namespace BlazorBookStore.Pages
     {
         [Inject]
         public IAuthorService AuthorService { get; set; }
-
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
         public List<Author> Authors { get; set; } = new List<Author>();
-
+        public bool IsVisible { get; set; } = false;
         public Author Author { get; set; } = new Author();
         protected ElementReference firstNameRef;
         public string[] Cities { get; set; }
+        public string RecordName { get; set; }
+        public bool IsSavedSuccessfully { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
             await LoadAuthors();
@@ -35,12 +37,14 @@ namespace BlazorBookStore.Pages
 
         public async Task SaveAuthorAsync()
         {
-            await AuthorService.SaveAuthor(Author);
+            IsSavedSuccessfully = false; // await AuthorService.SaveAuthor(Author);
+            IsVisible = true;
+            RecordName = Author.FirstName + " " + Author.LastName;
             await LoadAuthors();
             var firstName = Author.FirstName;
             var lastName = Author.LastName;
             Author = new Author();
-            await JSRuntime.InvokeVoidAsync("saveMessage", firstName, lastName);
+            // await JSRuntime.InvokeVoidAsync("saveMessage", firstName, lastName);
             await JSRuntime.InvokeVoidAsync("setFocus", firstNameRef);
         }
 
@@ -48,7 +52,6 @@ namespace BlazorBookStore.Pages
         {
             Authors = await AuthorService.GetAuthors();
             StateHasChanged();
-
         }
     }
 }

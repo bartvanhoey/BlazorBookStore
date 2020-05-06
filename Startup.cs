@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BlazorBookStore.Data;
+using BlazorBookStore.Data.Publishers;
 
 namespace BlazorBookStore
 {
@@ -30,6 +31,7 @@ namespace BlazorBookStore
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddScoped<IAuthorService, AuthorService>();
+            services.AddScoped<IPublisherService, PublisherService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
