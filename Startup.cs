@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BlazorBookStore.Data;
 using BlazorBookStore.Data.Publishers;
+using System.Net.Http;
 
 namespace BlazorBookStore
 {
@@ -32,6 +33,21 @@ namespace BlazorBookStore
             services.AddSingleton<WeatherForecastService>();
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<IPublisherService, PublisherService>();
+
+            //needed to make MatBlazor MatTable working
+            if (services.All(x => x.ServiceType != typeof(HttpClient)))
+            {
+                services.AddScoped(
+                    s =>
+                    {
+                        var navigationManager = s.GetRequiredService<NavigationManager>();
+                        return new HttpClient
+                        {
+                            BaseAddress = new Uri(navigationManager.BaseUri)
+                        };
+                    });
+            }
+            ///////////////////////////////////////////
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

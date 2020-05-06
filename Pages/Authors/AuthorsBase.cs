@@ -46,24 +46,33 @@ namespace BlazorBookStore.Pages
             await JSRuntime.InvokeVoidAsync("setFocus", firstNameRef);
         }
 
-        protected override void OnInitialized() => Console.WriteLine("Authors: OnInitialized");
+        protected override void OnInitialized()
+        {
+            // Console.WriteLine("Authors: OnInitialized");
+        }
         protected override async Task OnInitializedAsync()
         {
-            Console.WriteLine("Authors: OnInitializedAsync");
+            // Console.WriteLine("Authors: OnInitializedAsync");
             await LoadAuthors();
         }
-        protected override void OnParametersSet() => Console.WriteLine("Authors: OnParametersSet");
+        protected override void OnParametersSet()
+        {
+            // Console.WriteLine("Authors: OnParametersSet");
+        }
         protected override async Task OnParametersSetAsync()
         {
-            Console.WriteLine("Authors: OnParametersSetAsync");
+            // Console.WriteLine("Authors: OnParametersSetAsync");
             Result = await AuthorService.CheckConnection();
             IsVisible = true;
         }
 
-        protected override void OnAfterRender(bool firstRender) => Console.WriteLine($"Authors: OnAfterRender - firstRender = {firstRender}");
+        protected override void OnAfterRender(bool firstRender)
+        {
+            // Console.WriteLine($"Authors: OnAfterRender - firstRender = {firstRender}");
+        }
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            Console.WriteLine($"Authors: OnAfterRenderAsync - firstRender = {firstRender}");
+            // Console.WriteLine($"Authors: OnAfterRenderAsync - firstRender = {firstRender}");
             await base.OnAfterRenderAsync(firstRender);
         }
 
