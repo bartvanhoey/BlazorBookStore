@@ -1,0 +1,85 @@
+@page "/"
+@page "/authors"
+@inherits AuthorsBase 
+
+
+<div class="col-12">
+    <h3><b>Enter Author Information</b></h3>
+    <hr>
+
+   <ServerValidations IsVisible="IsVisible" Result="Result">
+        Author: @RecordName
+   </ServerValidations>
+
+     <EditForm Model="@Author" OnValidSubmit="@SaveAuthorAsync">
+         @* <DataAnnotationsValidator/> *@
+         <ValidationSummary/>
+        <div class="col-12 row">
+            <label for="firstName" class="col-2 font-weight-bold">First Name</label>
+            <input @ref="firstNameRef" id="firstName" @bind="Author.FirstName" placeholder="First Name" class="form-control col-3" />
+            <ValidationMessage For="@(() => Author.FirstName)"/>
+        </div>
+
+        <div class="col-12 row">
+            <label for="lastName" class="col-2 font-weight-bold">Last Name</label>
+            <InputText id="lastName" @bind-Value="Author.LastName" placeholder="Last Name" class="form-control col-3" />
+            <ValidationMessage For="@(() => Author.LastName)"/>
+        </div>
+
+        <div class="col-12 row">
+            <label for="city" class="col-2 font-weight-bold">City</label>
+            <SelectCity OnChangeEvent="OnSelectCityChange"></SelectCity>
+        </div>
+
+        <div class="col-12 row">
+            <label for="emailAddress" class="col-2 font-weight-bold">Email Address</label>
+            <InputText id="emailAddress" @bind-Value="Author.EmailAddress" placeholder="Email Address" class="form-control col-3" />
+            <ValidationMessage For="@(() => Author.EmailAddress)"/>
+        </div>
+
+        <br>
+        <div class="col-12 row">
+            <span class="col-2"></span>
+            <input type="submit" class="form-control col-1 btn btn-primary" value="Save">
+            <span>&nbsp;</span>
+            <input type="submit" class="form-control col-1 btn btn-primary" value="Clear">
+        </div>
+     </EditForm> 
+</div>
+
+<br>
+
+<div class="col-10">
+   <table class="table">
+       <thead>
+           <tr>
+               <th>AuthorId</th>
+               <th>First Name</th>
+               <th>Last Name</th>
+               @* <th>City</th> *@
+               <th>Email Address</th>
+               <th></th>
+           </tr>
+       </thead>
+       <tbody>
+        @foreach (var author in Authors)
+        {
+            <tr>
+                <td><NavLink href=@string.Format("/authors/authordetails/{0}", @author.AuthorId)>@author.AuthorId</NavLink></td>
+                <td>@author.FirstName</td>
+                <td>@author.LastName</td>
+                @* <td>@author.City</td> *@
+                <td>@author.EmailAddress</td>
+                <td><a @onclick="(() => DeleteAuthor(author.AuthorId))" style="text-underline-position:below;cursor:pointer;color:blue;font-weight: bold;">Delete</a>  |
+                <a @onclick="(() => EditAuthor(author))" style="text-underline-position:below;cursor:pointer;color:blue;font-weight: bold;">Edit</a> </td>
+            </tr>
+        }
+       </tbody>
+   </table>
+    
+</div>
+<hr>
+<div class="col-12 row">@AuthorService.GetCreationDate()</div>
+<div class="col-12 row">@AuthorService.GetVersion()</div>
+
+

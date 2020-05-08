@@ -1,0 +1,15 @@
+@page "/authors/authordetails/{id}" 
+@inherits AuthorDetailsBase
+
+<h3>Author Details</h3>
+
+<div class="col-12 row">
+    <h5 class="col-12 row" style="font-weight: bold;">@Author.FirstName @Author.LastName</h5>
+    <h5 class="col-12 row" >Phone: @Author.Phone</h5>
+    <h5 class="col-12 row" >@Author.City</h5>
+</div>
+
+<hr>
+
+<div class="col-12 row">@AuthorService.GetCreationDate()</div>
+<div class="col-12 row">@AuthorService.GetVersion()</div>
