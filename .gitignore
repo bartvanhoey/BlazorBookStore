@@ -348,6 +348,20 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+BookStore.API/bin/Debug/netcoreapp3.1/BookStore.API.dll
+BookStore.API/bin/Debug/netcoreapp3.1/BookStore.API.pdb
+BookStore.API/bin/Debug/netcoreapp3.1/BookStore.Model.dll
+BookStore.API/bin/Debug/netcoreapp3.1/BookStore.Model.pdb
+BookStore.API/obj/Debug/netcoreapp3.1/BookStore.API.AssemblyInfo.cs
+BookStore.API/obj/Debug/netcoreapp3.1/BookStore.API.csprojAssemblyReference.cache
+BookStore.API/obj/Debug/netcoreapp3.1/BookStore.API.dll
+BookStore.API/obj/Debug/netcoreapp3.1/BookStore.API.pdb
+BookStore.Model/bin/Debug/netstandard2.0/BookStore.Model.dll
+BookStore.Model/bin/Debug/netstandard2.0/BookStore.Model.pdb
+BookStore.Model/obj/Debug/netstandard2.0/BookStore.Model.AssemblyInfo.cs
+BookStore.Model/obj/Debug/netstandard2.0/BookStore.Model.dll
+BookStore.Model/obj/Debug/netstandard2.0/BookStore.Model.pdb
 BookStore.Model/obj/Debug/netstandard2.0/BookStore.Model.pdb
 BookStore.API/bin/Debug/netcoreapp3.1/appsettings.Development.json
 BookStore.API/bin/Debug/netcoreapp3.1/appsettings.json
