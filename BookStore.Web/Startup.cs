@@ -43,7 +43,9 @@ namespace BookStore.Web
                 options.BaseAddress = new Uri("https://localhost:52317/");
             });
 
-            //needed to make MatBlazor MatTable working
+            services.AddSingleton<HttpClient>();
+
+            // needed to make MatBlazor MatTable working
             if (services.All(x => x.ServiceType != typeof(HttpClient)))
             {
                 services.AddScoped(
@@ -56,7 +58,7 @@ namespace BookStore.Web
                         };
                     });
             }
-            ///////////////////////////////////////////
+            /////////////////////////////////////////
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
