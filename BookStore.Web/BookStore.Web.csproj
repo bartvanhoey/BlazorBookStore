@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
+    <PackageReference Include="blazored.sessionstorage" Version="1.0.11" />
     <PackageReference Include="matblazor" Version="2.4.3" />
   </ItemGroup>
 
