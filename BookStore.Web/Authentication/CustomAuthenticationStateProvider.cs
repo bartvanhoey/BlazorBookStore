@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.SessionStorage;
+using BookStore.Model;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace BookStore.Web.Authentication
@@ -31,7 +32,8 @@ namespace BookStore.Web.Authentication
             return new AuthenticationState(user);
         }
 
-         public async Task MarkUserAsAuthenticatedAsync(string emailAddress)
+
+         public async Task MarkUserAsAuthenticatedAsync(string emailAddress, string token = null)
         {
             var identity = new ClaimsIdentity(new[] {
                     new Claim(ClaimTypes.Name, emailAddress)}, "apiauth_type");
@@ -39,6 +41,7 @@ namespace BookStore.Web.Authentication
             var user = new ClaimsPrincipal(identity);
 
             await _sessionStorageService.SetItemAsync("emailAddress", emailAddress);
+            await _sessionStorageService.SetItemAsync("token", token);
 
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
         }
