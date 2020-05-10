@@ -12,6 +12,9 @@ using Microsoft.Extensions.Hosting;
 using BookStore.Web.Data;
 using BookStore.Web.Data.Publishers;
 using System.Net.Http;
+using Microsoft.AspNetCore.Components.Authorization;
+using BookStore.Web.Authentication;
+using Blazored.SessionStorage;
 
 namespace BookStore.Web
 {
@@ -32,8 +35,11 @@ namespace BookStore.Web
             services.AddServerSideBlazor();
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<IPublisherService, PublisherService>();
+            services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+            services.AddBlazoredSessionStorage();
 
-            services.AddHttpClient<IAuthorService, AuthorService>(options => {
+            services.AddHttpClient<IAuthorService, AuthorService>(options =>
+            {
                 options.BaseAddress = new Uri("https://localhost:52317/");
             });
 
@@ -71,6 +77,9 @@ namespace BookStore.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
