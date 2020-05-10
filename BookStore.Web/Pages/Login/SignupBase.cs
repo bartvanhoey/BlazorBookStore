@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Components.Authorization;
 
 namespace BookStore.Web.Pages.Login
 {
-    public class LoginBase : ComponentBase
+    public class SignupBase : ComponentBase
     {
-        [Inject]
+         [Inject]
         public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -19,7 +19,8 @@ namespace BookStore.Web.Pages.Login
         public async Task ValidateUser()
         {
             await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticatedAsync(User.EmailAddress);
-            NavigationManager.NavigateTo("/index");
+            NavigationManager.NavigateTo("/");
         }
+        
     }
 }
