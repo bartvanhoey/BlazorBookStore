@@ -1,9 +1,0 @@
-C:\_Data\Blazor\BlazorBookStore\BookStore.Model\bin\Debug\netstandard2.0\BookStore.Model.deps.json
-C:\_Data\Blazor\BlazorBookStore\BookStore.Model\bin\Debug\netstandard2.0\BookStore.Model.dll
-C:\_Data\Blazor\BlazorBookStore\BookStore.Model\bin\Debug\netstandard2.0\BookStore.Model.pdb
-C:\_Data\Blazor\BlazorBookStore\BookStore.Model\obj\Debug\netstandard2.0\BookStore.Model.csprojAssemblyReference.cache
-C:\_Data\Blazor\BlazorBookStore\BookStore.Model\obj\Debug\netstandard2.0\BookStore.Model.csproj.CoreCompileInputs.cache
-C:\_Data\Blazor\BlazorBookStore\BookStore.Model\obj\Debug\netstandard2.0\BookStore.Model.AssemblyInfoInputs.cache
-C:\_Data\Blazor\BlazorBookStore\BookStore.Model\obj\Debug\netstandard2.0\BookStore.Model.AssemblyInfo.cs
-C:\_Data\Blazor\BlazorBookStore\BookStore.Model\obj\Debug\netstandard2.0\BookStore.Model.dll
-C:\_Data\Blazor\BlazorBookStore\BookStore.Model\obj\Debug\netstandard2.0\BookStore.Model.pdb
