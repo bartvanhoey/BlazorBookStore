@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookStore.Model;
 using BookStore.API.Models;
-
-using Microsoft.AspNetCore.Authorization;
 
 namespace BookStore.API.Controllers
 {
@@ -25,7 +22,7 @@ namespace BookStore.API.Controllers
         }
 
         // GET: api/Publishers
-        [HttpGet("GetPublishers")]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<Publisher>>> GetPublishers()
         {
             return await _context.Publishers.ToListAsync();

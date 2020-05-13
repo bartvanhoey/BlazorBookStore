@@ -15,6 +15,7 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Components.Authorization;
 using BookStore.Web.Authentication;
 using Blazored.SessionStorage;
+using BookStore.Web.Services.Users;
 
 namespace BookStore.Web
 {
@@ -43,7 +44,18 @@ namespace BookStore.Web
                 options.BaseAddress = new Uri("https://localhost:52317/");
             });
 
-            services.AddSingleton<HttpClient>();
+            services.AddHttpClient<IPublisherService, PublisherService>(options =>
+            {
+                options.BaseAddress = new Uri("https://localhost:52317/");
+            });
+
+            services.AddHttpClient<IUserService, UserService>(options =>
+            {
+                options.BaseAddress = new Uri("https://localhost:52317/");
+                options.DefaultRequestHeaders.Add("User-Agent", "BlazorBookStore");
+            });
+
+            // services.AddSingleton<HttpClient>();
 
             // needed to make MatBlazor MatTable working
             if (services.All(x => x.ServiceType != typeof(HttpClient)))

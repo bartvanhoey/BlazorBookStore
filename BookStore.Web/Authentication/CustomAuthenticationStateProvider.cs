@@ -33,7 +33,7 @@ namespace BookStore.Web.Authentication
         }
 
 
-         public async Task MarkUserAsAuthenticatedAsync(string emailAddress, string token = null)
+        public async Task MarkUserAsAuthenticatedAsync(string emailAddress, string token = null)
         {
             var identity = new ClaimsIdentity(new[] {
                     new Claim(ClaimTypes.Name, emailAddress)}, "apiauth_type");
@@ -49,7 +49,7 @@ namespace BookStore.Web.Authentication
         public async Task MarkUserAsLoggedOut()
         {
             await _sessionStorageService.RemoveItemAsync("emailAddress");
-            
+
             var identity = new ClaimsIdentity();
             var user = new ClaimsPrincipal(identity);
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
