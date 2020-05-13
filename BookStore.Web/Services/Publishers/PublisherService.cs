@@ -1,42 +1,43 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Policy;
 using System.Threading.Tasks;
 using BookStore.Model;
+using Microsoft.AspNetCore.Components;
+using Publisher = BookStore.Model.Publisher;
 
 namespace BookStore.Web.Data.Publishers
 {
     public class PublisherService : IPublisherService
     {
+        private readonly HttpClient _httpClient;
 
-        public List<Model.Publisher> Publishers { get; set; } = new List<Model.Publisher>();
-        public PublisherService()
+        public PublisherService(HttpClient httpClient)
         {
-            // Publishers.Add(new Publisher("0736", "New Moon Books", "Boston", "MA", "USA"));
-            // Publishers.Add(new Publisher("0877", "Binnet & Hardley", "Washington", "DC", "USA"));
-            // Publishers.Add(new Publisher("1389", "Algodata Infosystems", "Berkeley", "CA", "USA"));
-            // Publishers.Add(new Publisher("1622", "Five Lakes Publishing", "Chicago", "IL", "USA"));
-            // Publishers.Add(new Publisher("1756", "Ramona Publishers", "Dallas", "TX", "USA"));
-
+            _httpClient = httpClient;
         }
+        public List<Publisher> Publishers { get; set; } = new List<Publisher>();
+      
+
         public Task<bool> DeletePublisher(int id)
         {
             Publishers.Remove(Publishers.FirstOrDefault(x => x.PubId == id));
             return Task.FromResult(true);
         }
 
-        public async Task<Model.Publisher> GetPublisher(int id)
+        public async Task<Publisher> GetPublisher(int id)
         {
             return await Task.FromResult(Publishers.FirstOrDefault(p => p.PubId == id));
         }
 
-        public async Task<List<Model.Publisher>> GetPublishers()
+        public async Task<List<Publisher>> GetPublishers()
         {
-            return await Task.FromResult(Publishers);
+            return await _httpClient.GetJsonAsync<List<Publisher>>("api/publishers");
         }
 
-        public Task<bool> SavePublisher(Model.Publisher Publisher)
+        public Task<bool> SavePublisher(Publisher Publisher)
         {
             Publisher.PubId = GeneratePublisherId();
             Publishers.Add(Publisher);
