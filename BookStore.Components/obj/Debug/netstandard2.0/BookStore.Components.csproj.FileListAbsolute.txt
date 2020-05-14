@@ -26,7 +26,6 @@ C:\_Data\Blazor\BookStore.API\BookStore.Components\obj\Debug\netstandard2.0\Book
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\bin\Debug\netstandard2.0\BookStore.Components.deps.json
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\bin\Debug\netstandard2.0\BookStore.Components.dll
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\bin\Debug\netstandard2.0\BookStore.Components.pdb
-C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\BookStore.Components.csprojAssemblyReference.cache
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\BookStore.Components.csproj.CoreCompileInputs.cache
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\BookStore.Components.RazorComponent.input.cache
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\RazorDeclaration\Component1.razor.g.cs

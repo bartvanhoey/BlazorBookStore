@@ -1,21 +1,18 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using BookStore.Web.Data;
-using BookStore.Web.Data.Publishers;
 using System.Net.Http;
 using Microsoft.AspNetCore.Components.Authorization;
 using BookStore.Web.Authentication;
-using Blazored.SessionStorage;
 using BookStore.Web.Services.Users;
+using Blazored.LocalStorage;
+using BookStore.Web.Services.BookStore;
+using BookStore.Model;
 
 namespace BookStore.Web
 {
@@ -34,28 +31,22 @@ namespace BookStore.Web
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddScoped<IAuthorService, AuthorService>();
-            services.AddScoped<IPublisherService, PublisherService>();
+
+            var appSettingSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingSection);
+
+            services.AddHttpClient<IBookStoreService<Publisher>, BookStoreService<Publisher>>();
+            services.AddHttpClient<IBookStoreService<Author>, BookStoreService<Author>>();
+
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
-            services.AddBlazoredSessionStorage();
 
-            services.AddHttpClient<IAuthorService, AuthorService>(options =>
-            {
-                options.BaseAddress = new Uri("https://localhost:52317/");
-            });
-
-            services.AddHttpClient<IPublisherService, PublisherService>(options =>
-            {
-                options.BaseAddress = new Uri("https://localhost:52317/");
-            });
+            services.AddBlazoredLocalStorage();
 
             services.AddHttpClient<IUserService, UserService>(options =>
             {
-                options.BaseAddress = new Uri("https://localhost:52317/");
+                options.BaseAddress = new Uri("https://localhost:52317/api/");
                 options.DefaultRequestHeaders.Add("User-Agent", "BlazorBookStore");
             });
-
-            // services.AddSingleton<HttpClient>();
 
             // needed to make MatBlazor MatTable working
             if (services.All(x => x.ServiceType != typeof(HttpClient)))

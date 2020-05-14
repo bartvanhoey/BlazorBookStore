@@ -6,5 +6,6 @@ namespace BookStore.Web.Services.Users
     public interface IUserService
     {
          Task<User> LoginAsync(User user);
+         Task<User> RegisterUserAsync(User user);
     }
 }
