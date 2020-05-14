@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookStore.Model;
 using BookStore.API.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookStore.API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PublishersController : ControllerBase
@@ -140,7 +141,7 @@ namespace BookStore.API.Controllers
         // PUT: api/Publishers/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("UpdatePublisher/{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> PutPublisher(int id, Publisher publisher)
         {
             if (id != publisher.PubId)
@@ -172,17 +173,16 @@ namespace BookStore.API.Controllers
         // POST: api/Publishers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPost("CreatePublisher")]
+        [HttpPost]
         public async Task<ActionResult<Publisher>> PostPublisher(Publisher publisher)
         {
             _context.Publishers.Add(publisher);
             await _context.SaveChangesAsync();
-
             return await Task.FromResult(publisher); //CreatedAtAction("GetPublisher", new { id = publisher.PubId }, publisher);
         }
 
         // DELETE: api/Publishers/5
-        [HttpDelete("DeletePublisher/{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<ActionResult<Publisher>> DeletePublisher(int id)
         {
             var publisher = await _context.Publishers.FindAsync(id);

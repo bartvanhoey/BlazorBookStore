@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookStore.Model;
 using BookStore.API.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using System.Text;
 using System.Security.Claims;
