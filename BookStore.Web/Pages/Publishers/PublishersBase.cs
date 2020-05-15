@@ -18,7 +18,7 @@ namespace BookStore.Web.Pages.Publishers
         public IJSRuntime JSRuntime { get; set; }
         public Publisher Publisher { get; set; } = new Publisher();
         public string[] Cities { get; set; }
-        public List<Publisher> Publishers { get; set; }
+        public List<Publisher> Publishers { get; set; } = new List<Publisher>();
         protected ElementReference publisherNameRef;
         private string _selectedCity;
         public bool IsVisible { get; set; } = false;
@@ -62,7 +62,8 @@ namespace BookStore.Web.Pages.Publishers
 
         private async Task LoadPublishers()
         {
-            Publishers = (await BookStoreService.GetAllAsync("publishers")).OrderByDescending(p => p.PubId).ToList();
+            var publishers = (await BookStoreService.GetAllAsync("publishers"));
+            Publishers = publishers != null ? publishers.OrderByDescending(p => p.PubId).ToList() : new List<Publisher>();
             StateHasChanged();
         }
 

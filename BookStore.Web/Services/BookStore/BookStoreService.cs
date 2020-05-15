@@ -44,8 +44,8 @@ namespace BookStore.Web.Services.BookStore
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, requestUri);
 
             var accessToken = await _localStorageService.GetItemAsync<string>("accessToken");
-            requestMessage.Headers.Authorization
-                = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+            // requestMessage.Headers.Authorization
+            //     = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
             var response = await _httpClient.SendAsync(requestMessage);
 

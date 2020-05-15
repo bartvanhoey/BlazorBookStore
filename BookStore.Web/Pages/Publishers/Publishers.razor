@@ -31,24 +31,30 @@
      </EditForm> 
 </div>
 <br>
-<MatTable Items="@Publishers" Striped="true" AllowSelection="true" RowClass="tester" class="mat-elevation-z5">
-    <MatTableHeader>
-        <th>PublisherId</th>
-        <th>Name</th>
-        <th>City</th>
-        <th></th>
-    </MatTableHeader>
-    <MatTableRow >
-        <td>@context.PubId</td>
-        <td>@context.PublisherName</td>
-        <td>@context.City</td>
-       <td>
-            <a @onclick="(() => DeletePublisher(context.PubId))" style="text-underline-position:below;cursor:pointer;color:blue;font-weight: bold;">Delete</a>  |
-            <a @onclick="(() => EditPublisher(context))" style="text-underline-position:below;cursor:pointer;color:blue;font-weight: bold;">Edit</a> 
-        </td>
-    </MatTableRow>
-</MatTable>
-
-
+<div class="col-10">
+    @if(Publishers != null && Publishers.Count > 0) {
+        <MatTable Items="@Publishers" Striped="true" AllowSelection="true" RowClass="tester" class="mat-elevation-z5">
+            <MatTableHeader>
+                <th>PublisherId</th>
+                <th>Name</th>
+                <th>City</th>
+                <th></th>
+            </MatTableHeader>
+            <MatTableRow >
+                <td>@context.PubId</td>
+                <td>@context.PublisherName</td>
+                <td>@context.City</td>
+            <td>
+                    <a @onclick="(() => DeletePublisher(context.PubId))" style="text-underline-position:below;cursor:pointer;color:blue;font-weight: bold;">Delete</a>  |
+                    <a @onclick="(() => EditPublisher(context))" style="text-underline-position:below;cursor:pointer;color:blue;font-weight: bold;">Edit</a> 
+                </td>
+            </MatTableRow>
+        </MatTable>
+    } 
+    else
+    {
+        <NoResultMessage></NoResultMessage>
+    }
+</div>
 
 

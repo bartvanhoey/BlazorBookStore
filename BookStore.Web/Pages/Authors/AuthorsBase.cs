@@ -24,7 +24,9 @@ namespace BookStore.Web.Pages
         private string _selectedCity;
         private async Task LoadAuthors()
         {
-            Authors = (await BookStoreService.GetAllAsync("authors")).OrderByDescending(a => a.AuthorId).ToList();
+ 
+            var authors = (await BookStoreService.GetAllAsync("authors"));
+            Authors = authors != null ? authors.OrderByDescending(a => a.AuthorId).ToList() : new List<Author>();
             StateHasChanged();
         }
         protected void OnSelectCityChange(ChangeEventArgs changeEventArgs)

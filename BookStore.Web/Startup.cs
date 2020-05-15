@@ -13,6 +13,7 @@ using BookStore.Web.Services.Users;
 using Blazored.LocalStorage;
 using BookStore.Web.Services.BookStore;
 using BookStore.Model;
+using BookStore.Web.Handlers;
 
 namespace BookStore.Web
 {
@@ -35,8 +36,12 @@ namespace BookStore.Web
             var appSettingSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingSection);
 
-            services.AddHttpClient<IBookStoreService<Publisher>, BookStoreService<Publisher>>();
-            services.AddHttpClient<IBookStoreService<Author>, BookStoreService<Author>>();
+            services.AddTransient<ValidateHeaderHandler>();
+
+            services.AddHttpClient<IBookStoreService<Publisher>, BookStoreService<Publisher>>()
+                .AddHttpMessageHandler<ValidateHeaderHandler>();
+            services.AddHttpClient<IBookStoreService<Author>, BookStoreService<Author>>()
+                .AddHttpMessageHandler<ValidateHeaderHandler>();
 
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
