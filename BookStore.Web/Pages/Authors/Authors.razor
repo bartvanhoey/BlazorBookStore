@@ -45,10 +45,10 @@
         </div>
      </EditForm> 
 </div>
-
 <br>
-
 <div class="col-10">
+@if (Authors != null && Authors.Count > 0)
+{
    <table class="table">
        <thead>
            <tr>
@@ -77,8 +77,11 @@
         }
        </tbody>
    </table>
-    
+}
+else 
+{
+     <NoResultMessage></NoResultMessage>
+}    
 </div>
-<hr>
 
 
