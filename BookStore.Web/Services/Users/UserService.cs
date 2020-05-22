@@ -105,9 +105,9 @@ namespace BookStore.Web.Services.Users
             var responseStatusCode = response.StatusCode;
             var responseBody = await response.Content.ReadAsStringAsync();
 
-            var returnedUser = JsonConvert.DeserializeObject<User>(responseBody);
+            var returnedUser = JsonConvert.DeserializeObject<UserWithToken>(responseBody);
 
-            return await Task.FromResult(returnedUser);
+            return returnedUser;
         }
 
         public async Task<User> GetUserByAccessTokenAsync(string accessToken)

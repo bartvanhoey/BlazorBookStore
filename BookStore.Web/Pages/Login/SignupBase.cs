@@ -23,12 +23,13 @@ namespace BookStore.Web.Pages.Login
         {
             User.Source = "APPC";
 
-            var returnedUser = await UserService.RegisterUserAsync(User);
+            var user = await UserService.RegisterUserAsync(User);
 
-            if (returnedUser.EmailAddress != null)
+            if (user.EmailAddress != null)
             {
-                await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticatedAsync(returnedUser);
-                NavigationManager.NavigateTo("/");
+                await ((CustomAuthenticationStateProvider)AuthenticationStateProvider)
+                    .MarkUserAsAuthenticatedAsync(user);
+                NavigationManager.NavigateTo("/index");
             } else {
                 LoginMessage = "Invalid username or password";
             }

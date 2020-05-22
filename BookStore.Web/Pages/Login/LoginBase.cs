@@ -32,7 +32,8 @@ namespace BookStore.Web.Pages.Login
 
             if (user != null)
             {
-                await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticatedAsync(user);
+                await ((CustomAuthenticationStateProvider)AuthenticationStateProvider)
+                    .MarkUserAsAuthenticatedAsync(user);
                 NavigationManager.NavigateTo("/index");
             }
             else

@@ -29,6 +29,7 @@ C:\_Data\Blazor\BlazorBookStore\BookStore.Components\bin\Debug\netstandard2.0\Bo
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\BookStore.Components.csproj.CoreCompileInputs.cache
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\BookStore.Components.RazorComponent.input.cache
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\RazorDeclaration\Component1.razor.g.cs
+C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\RazorDeclaration\NoResultMessage.razor.g.cs
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\RazorDeclaration\SelectCity.razor.g.cs
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\RazorDeclaration\ServerValidations.razor.g.cs
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\RazorDeclaration\_Imports.razor.g.cs
@@ -37,6 +38,7 @@ C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\Bo
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\BookStore.Components.TagHelpers.output.cache
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\BookStore.Components.RazorCoreGenerate.cache
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\Razor\Component1.razor.g.cs
+C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\Razor\NoResultMessage.razor.g.cs
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\Razor\SelectCity.razor.g.cs
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\Razor\ServerValidations.razor.g.cs
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\Razor\_Imports.razor.g.cs
@@ -47,6 +49,3 @@ C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\st
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\staticwebassets\BookStore.Components.StaticWebAssets.xml
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\BookStore.Components.dll
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\BookStore.Components.pdb
-C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\BookStore.Components.csprojAssemblyReference.cache
-C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\RazorDeclaration\NoResultMessage.razor.g.cs
-C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\Razor\NoResultMessage.razor.g.cs
