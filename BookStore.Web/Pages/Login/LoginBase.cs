@@ -24,7 +24,7 @@ namespace BookStore.Web.Pages.Login
 
         [Inject]
         public IUserService UserService { get; set; }
-        public User User { get; set; } = new User();
+        public User User { get; set; } = new User { EmailAddress = "john.smith@gmail.com", Password = "8be7dbd7237e2e0bf90ff81b8ff44333" };
         public string LoginMessage { get; set; }
         public async Task ValidateUser()
         {
@@ -32,8 +32,7 @@ namespace BookStore.Web.Pages.Login
 
             if (user != null)
             {
-                await ((CustomAuthenticationStateProvider)AuthenticationStateProvider)
-                    .MarkUserAsAuthenticatedAsync(user.EmailAddress, ((UserWithToken) user).AccessToken);
+                await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticatedAsync(user);
                 NavigationManager.NavigateTo("/index");
             }
             else

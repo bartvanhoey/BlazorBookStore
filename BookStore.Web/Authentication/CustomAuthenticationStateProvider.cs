@@ -3,76 +3,67 @@ using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using Blazored.SessionStorage;
 using BookStore.Model;
+using BookStore.Web.Services.Users;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace BookStore.Web.Authentication
 {
     public class CustomAuthenticationStateProvider : AuthenticationStateProvider
     {
-        // private readonly ISessionStorageService _sessionStorageService;
         private readonly ILocalStorageService _localStorageService;
+        private readonly IUserService _userService;
 
-        public CustomAuthenticationStateProvider(ILocalStorageService localStorageService)
+        public CustomAuthenticationStateProvider(ILocalStorageService localStorageService, IUserService userService)
         {
+            _userService = userService;
             _localStorageService = localStorageService;
-            // _sessionStorageService = sessionStorageService;
         }
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var emailAddress = await _localStorageService.GetItemAsync<string>("emailAddress");
+            var accessToken = await _localStorageService.GetItemAsync<string>("accessToken");
             ClaimsIdentity identity;
-
-            if (emailAddress == null)
+            if (!string.IsNullOrEmpty(accessToken))
             {
-                identity = new ClaimsIdentity();
+                var user = await _userService.GetUserByAccessTokenAsync(accessToken);
+                identity = GetClaimsIdentity(user);
             }
             else
             {
-                identity = new ClaimsIdentity(new[] {
-                    new Claim(ClaimTypes.Name, emailAddress)}, "apiauth_type");
+                identity = new ClaimsIdentity();
             }
-            var user = new ClaimsPrincipal(identity);
-            return new AuthenticationState(user);
+            var claimsPrincipal = new ClaimsPrincipal(identity);
+            return new AuthenticationState(claimsPrincipal);
         }
 
         public async Task MarkUserAsAuthenticatedAsync(User user)
         {
-            await MarkUserAsAuthenticatedAsync(user.EmailAddress);
-        }
-        public async Task MarkUserAsAuthenticatedAsync(string emailAddress, string token = null)
-        {
-            var identity = new ClaimsIdentity(new[] {
-                    new Claim(ClaimTypes.Name, emailAddress)}, "apiauth_type");
-
-            var user = new ClaimsPrincipal(identity);
-
-            // await _sessionStorageService.SetItemAsync("emailAddress", emailAddress);
-            // await _sessionStorageService.SetItemAsync("token", token);
-
-            await _localStorageService.SetItemAsync("emailAddress", emailAddress);
-            await _localStorageService.SetItemAsync("accessToken", token);
-
-            NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
+            var identity = GetClaimsIdentity(user);
+            await _localStorageService.SetItemAsync("accessToken", ((UserWithToken)user).AccessToken);
+            await _localStorageService.SetItemAsync("refreshToken", ((UserWithToken)user).RefreshToken);
+            var claimsPrincipal = new ClaimsPrincipal(identity);
+            NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(claimsPrincipal)));
         }
 
         public async Task MarkUserAsLoggedOut()
         {
-            await _localStorageService.RemoveItemAsync("emailAddress");
-            await _localStorageService.RemoveItemAsync("emailAddress");
-
+            await _localStorageService.RemoveItemAsync("accessToken");
+            await _localStorageService.RemoveItemAsync("refreshToken");
             var identity = new ClaimsIdentity();
-            var user = new ClaimsPrincipal(identity);
-            NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
+            var claimsPrincipal = new ClaimsPrincipal(identity);
+            NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(claimsPrincipal)));
         }
 
-
-
-
-
-
-
-
-
-
+        private ClaimsIdentity GetClaimsIdentity(User user)
+        {
+            var claimsIdentity = new ClaimsIdentity();
+            if (user != null && user.EmailAddress != null)
+            {
+                claimsIdentity = new ClaimsIdentity(new[]
+                               {
+                                    new Claim(ClaimTypes.Name, user.EmailAddress)
+                               }, "apiauth_type");
+            }
+            return claimsIdentity;
+        }
     }
 }

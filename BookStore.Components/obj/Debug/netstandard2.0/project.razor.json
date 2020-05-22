@@ -58,6 +58,55 @@
       },
       {
         "Kind": "Components.Component",
+        "Name": "BookStore.Components.NoResultMessage",
+        "AssemblyName": "BookStore.Components",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "NoResultMessage",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BookStore.Components.NoResultMessage"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "BookStore.Components.NoResultMessage",
+        "AssemblyName": "BookStore.Components",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BookStore.Components.NoResultMessage",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BookStore.Components.NoResultMessage",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "Kind": "Components.Component",
         "Name": "BookStore.Components.SelectCity",
         "AssemblyName": "BookStore.Components",
         "Documentation": null,
@@ -16403,6 +16452,11 @@
   },
   "RootNamespace": "BookStore.Components",
   "Documents": [
+    {
+      "FilePath": "c:\\_Data\\Blazor\\BlazorBookStore\\BookStore.Components\\NoResultMessage.razor",
+      "TargetPath": "NoResultMessage.razor",
+      "FileKind": "component"
+    },
     {
       "FilePath": "c:\\_Data\\Blazor\\BlazorBookStore\\BookStore.Components\\ServerValidations.razor",
       "TargetPath": "ServerValidations.razor",
