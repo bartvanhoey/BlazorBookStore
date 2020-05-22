@@ -60,7 +60,8 @@ namespace BookStore.Web.Authentication
             {
                 claimsIdentity = new ClaimsIdentity(new[]
                                {
-                                    new Claim(ClaimTypes.Name, user.EmailAddress)
+                                    new Claim(ClaimTypes.Name, user.EmailAddress),
+                                    new Claim(ClaimTypes.Role, user.Role.RoleDesc),
                                }, "apiauth_type");
             }
             return claimsIdentity;

@@ -57,7 +57,11 @@
                <th>Last Name</th>
                <th>City</th>
                <th>Email Address</th>
-               <th></th>
+               <AuthorizeView Roles="Publisher">
+                   <Authorized>
+                        <th>Actions</th>
+                   </Authorized>
+               </AuthorizeView>
            </tr>
        </thead>
        <tbody>
@@ -69,10 +73,14 @@
                 <td>@author.LastName</td>
                 <td>@author.City</td>
                 <td>@author.EmailAddress</td>
-                <td>
-                    <a @onclick="(() => DeleteAuthor(author.AuthorId))" style="text-underline-position:below;cursor:pointer;color:blue;font-weight: bold;">Delete</a>  |
-                    <a @onclick="(() => EditAuthor(author))" style="text-underline-position:below;cursor:pointer;color:blue;font-weight: bold;">Edit</a> 
-                </td>
+                <AuthorizeView Roles="Publisher">
+                   <Authorized>
+                    <td>
+                        <a @onclick="(() => DeleteAuthor(author.AuthorId))" style="text-underline-position:below;cursor:pointer;color:blue;font-weight: bold;">Delete</a>  |
+                        <a @onclick="(() => EditAuthor(author))" style="text-underline-position:below;cursor:pointer;color:blue;font-weight: bold;">Edit</a> 
+                    </td>
+                   </Authorized>
+               </AuthorizeView>
             </tr>
         }
        </tbody>

@@ -49,3 +49,4 @@ C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\st
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\staticwebassets\BookStore.Components.StaticWebAssets.xml
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\BookStore.Components.dll
 C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\BookStore.Components.pdb
+C:\_Data\Blazor\BlazorBookStore\BookStore.Components\obj\Debug\netstandard2.0\BookStore.Components.csprojAssemblyReference.cache

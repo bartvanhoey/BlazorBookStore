@@ -1,5 +1,6 @@
 @page "/publishers"
 @inherits PublishersBase 
+@attribute [Authorize(Roles = "Publisher")]
 
 <div class="col-12">
     <h3><b>Enter Publisher Information</b></h3>
