@@ -1,0 +1,34 @@
+@page  "/signup"
+@inherits SignupBase
+
+<EditForm Model="@User" OnValidSubmit="@RegisterUser">
+    <div>
+        <br><br><br>
+    </div>
+    <div>
+        <h3 style="font-weight:bold; color:purple">Book Stores Signup</h3>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div class="col-12 row">
+        <input class="form-control col-12" @bind="User.EmailAddress" placeholder="email address" />
+    </div>
+    <br>
+    <div class="col-12 row">
+        <input type="password" class="form-control col-12" @bind="User.Password" placeholder="password" />
+    </div>
+    <br>
+        <div class="col-12 row">
+        <input type="password" class="form-control col-12" @bind="User.ConfirmPassword" placeholder="confirm password" />
+    </div>
+    <br>
+    <div class="col-12 row">
+        <span class="col-12"></span>
+        <input type="submit" class="form-control col-6 btn btn-primary" value="Signup" />
+    </div>
+    <br>
+    <div class="col-12 row" style="text-align:left; font-weight:bold">
+        <span class="col-12">@LoginMessage</span>
+    </div>
+</EditForm>
