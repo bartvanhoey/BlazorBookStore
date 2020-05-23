@@ -1,6 +1,7 @@
 ﻿@page "/index"
+@inherits IndexBase
 
-<AuthorizeView>
+@* <AuthorizeView>
     <Authorized>
         <p>Welcome, @context.User.Identity.Name</p>
     </Authorized>
@@ -16,4 +17,15 @@
     <NotAuthorized>
         <p>You are not a publisher!</p>
     </NotAuthorized>
-</AuthorizeView>
+</AuthorizeView> *@
+
+@if (IsAuthenticated)
+{
+    <h1><b>@user.Identity.Name</b> is logged in!!!!</h1>  
+    <p>Is Publisher: @IsPublisher</p>  
+    <p>Is Senior Employee: @IsSeniorEmployee</p>  
+}
+else
+{
+    <h1><b>User is logged out</b></h1>    
+}
