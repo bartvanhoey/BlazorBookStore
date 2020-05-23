@@ -1,3 +1,4 @@
+using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
@@ -38,9 +39,12 @@ namespace BookStore.Web.Authentication
         public async Task MarkUserAsAuthenticatedAsync(User user)
         {
             var identity = GetClaimsIdentity(user);
+
             await _localStorageService.SetItemAsync("accessToken", ((UserWithToken)user).AccessToken);
             await _localStorageService.SetItemAsync("refreshToken", ((UserWithToken)user).RefreshToken);
+            
             var claimsPrincipal = new ClaimsPrincipal(identity);
+            
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(claimsPrincipal)));
         }
 
@@ -48,8 +52,11 @@ namespace BookStore.Web.Authentication
         {
             await _localStorageService.RemoveItemAsync("accessToken");
             await _localStorageService.RemoveItemAsync("refreshToken");
+          
             var identity = new ClaimsIdentity();
+
             var claimsPrincipal = new ClaimsPrincipal(identity);
+          
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(claimsPrincipal)));
         }
 
@@ -62,9 +69,17 @@ namespace BookStore.Web.Authentication
                                {
                                     new Claim(ClaimTypes.Name, user.EmailAddress),
                                     new Claim(ClaimTypes.Role, user.Role.RoleDesc),
+                                    new Claim("IsEmployedBefore1990", IsEmployedBefore1990(user))
+                                    // new Claim("IsEmployedBefore1990", ),
                                }, "apiauth_type");
             }
             return claimsIdentity;
+        }
+
+        private string IsEmployedBefore1990(User user)
+        {
+            if (user.HireDate.Value.Year < 1990) return "true";
+            return "false";
         }
     }
 }

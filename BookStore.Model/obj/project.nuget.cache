@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XcY2yRlRpSwlTzRLXxSd13E7MFZ2MUhi5mk23m25E7NHd0VtJcIr5W3UB3aTX0TGNVAdHnSadRJLfrogwBuBbg==",
+  "dgSpecHash": "cBts7hlY+FD+EPKxWPAJJJnAKQuO3QlZFjCZiqm09vtDB+fpz3ZwkLj4DXWbWr7m9bb3DUhSaCWcTq2kg0mCFA==",
   "success": true,
   "projectFilePath": "C:\\_Data\\Blazor\\BlazorBookStore\\BookStore.Model\\BookStore.Model.csproj",
   "expectedPackageFiles": [

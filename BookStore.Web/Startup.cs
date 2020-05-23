@@ -47,6 +47,11 @@ namespace BookStore.Web
 
             services.AddBlazoredLocalStorage();
 
+            services.AddAuthorization(options => {
+                options.AddPolicy("SeniorEmployee", policy => 
+                policy.RequireClaim("IsEmployedBefore1990", "true"));
+            });
+
             services.AddHttpClient<IUserService, UserService>(options =>
             {
                 options.BaseAddress = new Uri("https://localhost:52317/api/");
