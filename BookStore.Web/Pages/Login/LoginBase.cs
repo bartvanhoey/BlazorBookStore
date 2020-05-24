@@ -15,16 +15,13 @@ namespace BookStore.Web.Pages.Login
     public class LoginBase : ComponentBase
     {
         [Inject]
-        public HttpClient HttpClient { get; set; }
-
-        [Inject]
         public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
         [Inject]
         public IUserService UserService { get; set; }
-        public User User { get; set; } = new User { EmailAddress = "john.smith@gmail.com", Password = "8be7dbd7237e2e0bf90ff81b8ff44333" };
+        public User User { get; set; } = new User { EmailAddress = "philip.cramer@gmail.com", Password = "33a7ce1b2f70fcbe4f7c2730d9885aab" };
         public string LoginMessage { get; set; }
         public async Task ValidateUser()
         {
