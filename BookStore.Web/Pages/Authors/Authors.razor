@@ -49,9 +49,8 @@
 <div class="col-10">
 @if (Authors != null && Authors.Count > 0)
 {
-   <table class="table">
-       <thead>
-           <tr>
+    <TableTemplate Items="Authors">
+        <TableHeader>
                <th>AuthorId</th>
                <th>First Name</th>
                <th>Last Name</th>
@@ -62,29 +61,23 @@
                         <th>Actions</th>
                    </Authorized>
                </AuthorizeView>
-           </tr>
-       </thead>
-       <tbody>
-        @foreach (var author in Authors)
-        {
-            <tr>
-                <td><NavLink href=@string.Format("/authors/authordetails/{0}", @author.AuthorId)>@author.AuthorId</NavLink></td>
-                <td>@author.FirstName</td>
-                <td>@author.LastName</td>
-                <td>@author.City</td>
-                <td>@author.EmailAddress</td>
-                <AuthorizeView Roles="Publisher"  Policy="SeniorEmployee">
-                   <Authorized>
+        </TableHeader>
+        <TableRows Context="author">
+            <td><NavLink href=@string.Format("/authors/authordetails/{0}", @author.AuthorId)>@author.AuthorId</NavLink></td>
+            <td>@author.FirstName</td>
+            <td>@author.LastName</td>
+            <td>@author.City</td>
+            <td>@author.EmailAddress</td>
+            <AuthorizeView Roles="Publisher"  Policy="SeniorEmployee">
+                <Authorized>
                     <td>
                         <a @onclick="(() => DeleteAuthor(author.AuthorId))" style="text-underline-position:below;cursor:pointer;color:blue;font-weight: bold;">Delete</a>  |
                         <a @onclick="(() => EditAuthor(author))" style="text-underline-position:below;cursor:pointer;color:blue;font-weight: bold;">Edit</a> 
                     </td>
-                   </Authorized>
-               </AuthorizeView>
-            </tr>
-        }
-       </tbody>
-   </table>
+                </Authorized>
+            </AuthorizeView>
+        </TableRows>
+    </TableTemplate>
 }
 else 
 {

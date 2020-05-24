@@ -1,0 +1,20 @@
+@inherits TableTemplateBase<TItem>
+@typeparam TItem
+
+<div class="table-wrapper-scroll-y my-custom-scrollbar" >
+    <table class="table table-bordered table-stripped mb-0">
+        <thead class="bg-light">
+           <tr> 
+               @TableHeader
+           </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Items)
+            {
+                <tr>
+                    @TableRows(item)
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
