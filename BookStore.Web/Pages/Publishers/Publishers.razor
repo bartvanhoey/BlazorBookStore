@@ -34,11 +34,11 @@
 <br>
 <div class="col-10">
     @if(Publishers != null && Publishers.Count > 0) {
-        <TableTemplate Items="Publishers">
+        <TableTemplate Items="FilteredPublishers">
             <TableHeader>
-                <th>PublisherId</th>
-                    <th>Name</th>
-                    <th>City</th>
+                    <GridColumn ColumnTitle="PublisherId" OnSearchTextChanged="@((e) => OnPublisherSearchTextChanged(e, "id"))"></GridColumn>
+                    <GridColumn ColumnTitle="Name" OnSearchTextChanged="@((e) => OnPublisherSearchTextChanged(e, "name"))"></GridColumn>
+                    <GridColumn ColumnTitle="City" OnSearchTextChanged="@((e) => OnPublisherSearchTextChanged(e, "city"))"></GridColumn>
                     <th>Actions</th>
             </TableHeader>
             <TableRows Context="publisher">

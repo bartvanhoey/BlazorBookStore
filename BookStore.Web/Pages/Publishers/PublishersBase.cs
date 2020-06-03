@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BookStore.Model;
-using BookStore.Web.Data.Publishers;
 using BookStore.Web.Services.BookStore;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -19,6 +18,7 @@ namespace BookStore.Web.Pages.Publishers
         public Publisher Publisher { get; set; } = new Publisher();
         public string[] Cities { get; set; }
         public List<Publisher> Publishers { get; set; } = new List<Publisher>();
+        public List<Publisher> FilteredPublishers { get; set; } = new List<Publisher>();
         protected ElementReference publisherNameRef;
         private string _selectedCity;
         public bool IsVisible { get; set; } = false;
@@ -63,13 +63,31 @@ namespace BookStore.Web.Pages.Publishers
         private async Task LoadPublishers()
         {
             var publishers = (await BookStoreService.GetAllAsync("publishers"));
-            Publishers = publishers != null ? publishers.OrderByDescending(p => p.PubId).ToList() : new List<Publisher>();
+            FilteredPublishers = Publishers = publishers != null ? publishers.OrderByDescending(p => p.PubId).ToList() : new List<Publisher>();
             StateHasChanged();
         }
 
         protected void OnSelectCityChange(ChangeEventArgs changeEventArgs)
         {
             _selectedCity = changeEventArgs.Value.ToString();
+        }
+
+        protected void OnPublisherSearchTextChanged(ChangeEventArgs eventArgs, string columnTitle)
+        {
+            var searchText = eventArgs.Value.ToString();
+            switch (columnTitle)
+            {
+                case "id":
+                    FilteredPublishers = Publishers.Where(p => p.PubId == int.Parse(searchText)).ToList();
+                    break;
+                case "name":
+                    FilteredPublishers = Publishers.Where(p => p.PublisherName != null && p.PublisherName.Contains(searchText, StringComparison.InvariantCultureIgnoreCase)).ToList();
+                    break;
+                case "city":
+                    FilteredPublishers = Publishers.Where(p => p.City != null && p.City.Contains(searchText, StringComparison.InvariantCultureIgnoreCase)).ToList();
+                    break;
+            }
+            StateHasChanged();
         }
     }
 }

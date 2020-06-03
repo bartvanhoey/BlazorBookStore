@@ -1,0 +1,13 @@
+<th>
+    <div class="col-10 row">
+            @ColumnTitle
+            <input type="text" class="form-control" placeholder="search" autocomplete="on" @oninput="OnSearchTextChanged" >
+    </div>
+</th>
+
+@code {
+    [Parameter] public string ColumnTitle { get; set; }
+    [Parameter] public EventCallback<ChangeEventArgs> OnSearchTextChanged { get; set; }
+}
+
+
