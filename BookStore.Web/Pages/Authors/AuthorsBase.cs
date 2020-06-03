@@ -15,6 +15,7 @@ namespace BookStore.Web.Pages
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
         public List<Author> Authors { get; set; } = new List<Author>();
+        public List<Author> FilteredAuthors { get; set; } = new List<Author>();
         public bool IsVisible { get; set; } = false;
         public Author Author { get; set; } = new Author();
         protected ElementReference firstNameRef;
@@ -22,11 +23,12 @@ namespace BookStore.Web.Pages
         public string RecordName { get; set; }
         public bool Result { get; set; } = true;
         private string _selectedCity;
+        public bool IsGridViewFiltered { get; set; } 
+
         private async Task LoadAuthors()
         {
- 
             var authors = (await BookStoreService.GetAllAsync("authors"));
-            Authors = authors != null ? authors.OrderByDescending(a => a.AuthorId).ToList() : new List<Author>();
+            FilteredAuthors = Authors = authors != null ? authors.OrderByDescending(a => a.AuthorId).ToList() : new List<Author>();
             StateHasChanged();
         }
         protected void OnSelectCityChange(ChangeEventArgs changeEventArgs)
@@ -64,6 +66,31 @@ namespace BookStore.Web.Pages
         protected override async Task OnInitializedAsync()
         {
             await LoadAuthors();
+        }
+
+        protected void OnAuthorSearchTextChanged(ChangeEventArgs changeEventArgs, string columnTitle)
+        {
+            string searchText = changeEventArgs.Value.ToString();
+            IsGridViewFiltered = true;
+
+            switch (columnTitle)
+            {
+                case "AuthorId":
+                    FilteredAuthors = Authors.Where(a => a.AuthorId.ToString().Contains(searchText)).ToList();
+                    break;
+                case "FirstName":
+                    FilteredAuthors = Authors.Where(a => a.FirstName.ToLower().Contains(searchText)).ToList();
+                    break;
+                case "LastName":
+                    FilteredAuthors = Authors.Where(a => a.LastName.ToLower().Contains(searchText)).ToList();
+                    break;
+                case "City":
+                    FilteredAuthors = Authors.Where(a => a.City.ToLower().Contains(searchText)).ToList();
+                    break;
+                case "EmailAddress":
+                    FilteredAuthors = Authors.Where(a => a.EmailAddress.ToLower().Contains(searchText)).ToList();
+                    break;
+            }
         }
     }
 }

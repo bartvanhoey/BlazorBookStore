@@ -49,20 +49,25 @@
 <div class="col-10">
 @if (Authors != null && Authors.Count > 0)
 {
-    <TableTemplate Items="Authors">
-        <TableHeader>
-               <th>AuthorId</th>
-               <th>First Name</th>
-               <th>Last Name</th>
-               <th>City</th>
-               <th>Email Address</th>
-               <AuthorizeView Roles="Publisher" Policy="SeniorEmployee">
-                   <Authorized>
-                        <th>Actions</th>
-                   </Authorized>
-               </AuthorizeView>
-        </TableHeader>
-        <TableRows Context="author">
+    <GridView Items="Authors">
+        <GridColumns>
+            <GridColumn ColumnTitle="AuthorId"
+                        OnSearchTextChanged="@(e => OnAuthorSearchTextChanged(e, "AuthorId"))"></GridColumn>
+            <GridColumn ColumnTitle="FirstName"
+                        OnSearchTextChanged="@(e => OnAuthorSearchTextChanged(e, "FirstName"))"></GridColumn>
+            <GridColumn ColumnTitle="LastName"
+                        OnSearchTextChanged="@(e => OnAuthorSearchTextChanged(e, "LastName"))"></GridColumn>
+            <GridColumn ColumnTitle="City"
+                        OnSearchTextChanged="@(e => OnAuthorSearchTextChanged(e, "City"))"></GridColumn>
+            <GridColumn ColumnTitle="Email"
+                        OnSearchTextChanged="@(e => OnAuthorSearchTextChanged(e, "Email"))"></GridColumn>
+            <AuthorizeView Roles="Publisher" Policy="SeniorEmployee">
+                <Authorized>
+                    <GridColumn ColumnTitle="Actions"></GridColumn>
+                </Authorized>
+            </AuthorizeView>
+        </GridColumns>
+        <GridRow Context="author">
             <td><NavLink href=@string.Format("/authors/authordetails/{0}", @author.AuthorId)>@author.AuthorId</NavLink></td>
             <td>@author.FirstName</td>
             <td>@author.LastName</td>
@@ -76,8 +81,8 @@
                     </td>
                 </Authorized>
             </AuthorizeView>
-        </TableRows>
-    </TableTemplate>
+        </GridRow>
+    </GridView>
 }
 else 
 {
